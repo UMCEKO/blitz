@@ -44,7 +44,7 @@ fn block_overflow_hidden_card_sizes_grid_track() {
 
 #[test]
 fn flex_overflow_hidden_card_sizes_grid_track() {
-    // Control: the flex variant (this one was already fixed upstream).
+    // The flex variant of the same shape.
     let doc = layout_doc(
         r#"<html><body style="margin:0">
             <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; width:600px;">

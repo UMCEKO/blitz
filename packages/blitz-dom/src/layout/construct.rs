@@ -249,9 +249,7 @@ pub(crate) fn collect_layout_children(
             let mut has_contents = false;
             // display:contents children are transparent for box generation:
             // their children participate in this container's formatting
-            // context, so classification must recurse into them. Work-stack
-            // in place of plain iteration (reversed so order is preserved,
-            // though classification is order-independent).
+            // context, so classification must recurse into them.
             let mut classify_stack: Vec<usize> = doc.nodes[container_node_id]
                 .children
                 .iter()
@@ -279,8 +277,7 @@ pub(crate) fn collect_layout_children(
                     .unwrap_or(Display::inline());
                 if matches!(display.inside(), DisplayInside::Contents) {
                     // Transparent for box generation: the contents node casts
-                    // no vote itself — its children (pushed onto the stack)
-                    // decide the formatting context.
+                    // no vote itself — its children decide.
                     has_contents = true;
                     classify_stack.extend(child.children.iter().copied().rev());
                 } else {
